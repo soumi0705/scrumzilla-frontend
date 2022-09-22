@@ -1,0 +1,20 @@
+modules:
+  jira:projectPage:
+    - key: scrumzilla-hello-world-project-page
+      resource: main
+      resolver:
+        function: resolver
+      title: Scrumzilla
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/scrumzilla/build
+    tunnel:
+      port: 3000
+app:
+  id: ari:cloud:ecosystem::app/37cf66e1-691b-47dc-bea1-86f1c8a8eb61
+permissions:
+  scopes:
+    - read:jira-user
