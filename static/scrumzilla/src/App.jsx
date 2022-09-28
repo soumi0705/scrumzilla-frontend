@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@forge/bridge";
-import Header from "./components/header";
+import "./App.css";
 
 function App() {
   const [data, setData] = useState(null);
@@ -13,11 +13,8 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {data ? data : (
-        "Loading..."
-      )}
-      <Header />
+    <div className="App">
+      Good Girl
     </div>
   );
 }

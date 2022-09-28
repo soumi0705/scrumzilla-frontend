@@ -1,5 +1,5 @@
 import Resolver from "@forge/resolver";
-import { fetchUsers } from "./utilsAPI";
+import { testIssuesQuery, fetchIssuesQuery, fetchUsers, fetchByRoute } from "./utilsAPI";
 import * as fs from 'fs';
 const resolver = new Resolver();
 
@@ -11,9 +11,10 @@ resolver.define("getText", (req) => {
 
 resolver.define("doCalculation",async ({ payload, context }) => {
   console.log(payload);
-  const userData = await fetchUsers(context.accountId);
-  console.log(userData);
-  return userData;
+  const issueData = await testIssuesQuery();
+  console.log(issueData);
+  console.log('Issue Data:', await fetchByRoute(issueData.issues[0].self));
+  return issueData;
 });
 
 export const handler = resolver.getDefinitions();
