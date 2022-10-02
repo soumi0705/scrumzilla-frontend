@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@forge/api": "^2.7.0",
-    "@forge/resolver": "^1.4.4",
+    "@forge/api": "^2.6.0",
+    "@forge/resolver": "^1.4.2",
     "fs": "^0.0.1-security"
   }
 }

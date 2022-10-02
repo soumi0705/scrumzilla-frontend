@@ -1,5 +1,5 @@
 import Resolver from "@forge/resolver";
-import { testIssuesQuery, fetchIssuesQuery, fetchUsers, fetchByRoute } from "./utilsAPI";
+import { testIssuesQuery, fetchByRoute } from "./utilsAPI";
 import * as fs from 'fs';
 const resolver = new Resolver();
 

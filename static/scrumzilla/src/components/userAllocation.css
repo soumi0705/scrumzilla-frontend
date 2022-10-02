@@ -1,0 +1,30 @@
+.card-title{
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 600;
+    color: #505F79;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+.tab-header{
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab{
+  font-size: 18px;
+  padding: 7px;
+}
+
+.heading{
+  padding:20px 10px;
+  font-size: 28px;
+  text-align: left;
+  color: #505F79;
+}
+/* .tab.css-bhp9pd-MuiPaper-root-MuiCard-root{
+  font-size: 16px;
+  padding: 15px;
+} */
