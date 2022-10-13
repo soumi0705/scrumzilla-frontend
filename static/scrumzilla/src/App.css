@@ -8,6 +8,12 @@
 .App {
   text-align: center;
   font-family: 'Inter' !important;
+  font-size: 14px;
+}
+
+img {
+  height: 16px;
+  width: 16px;
 }
 
 .App-logo {

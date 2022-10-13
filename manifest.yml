@@ -20,3 +20,10 @@ permissions:
     - manage:jira-configuration
     - read:jira-work
     - read:jira-user
+  content:
+    styles:
+      - 'unsafe-inline'
+  external:
+    images:
+      - 'https://my-jira-app.atlassian.net'
+      - 'https://i2.wp.com/'

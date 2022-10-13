@@ -4,13 +4,16 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@atlaskit/avatar": "^21.1.0",
+    "@atlaskit/badge": "^15.0.20",
     "@atlaskit/css-reset": "^6.0.1",
     "@forge/bridge": "^2.4.0",
+    "@forge/ui": "^1.4.0",
     "bootstrap": "^5.2.1",
     "fs": "^0.0.1-security",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^3.4.4",
     "reactstrap": "^9.1.4"
   },
   "scripts": {
