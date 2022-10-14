@@ -6,7 +6,11 @@
   "dependencies": {
     "@atlaskit/avatar": "^21.1.0",
     "@atlaskit/badge": "^15.0.20",
+    "@atlaskit/button": "^16.3.9",
     "@atlaskit/css-reset": "^6.0.1",
+    "@atlaskit/dropdown-menu": "^11.5.1",
+    "@atlaskit/lozenge": "^11.2.4",
+    "@atlaskit/select": "^15.7.3",
     "@forge/bridge": "^2.4.0",
     "@forge/ui": "^1.4.0",
     "bootstrap": "^5.2.1",

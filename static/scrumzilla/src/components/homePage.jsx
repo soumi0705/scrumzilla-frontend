@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Card, CardBody } from "reactstrap";
 import { userAllocationHomePage } from "./mocks/mockData";
-import IssueTable from "./issueTable";
-import "./userAllocation.css";
+import IssuesComponent from "./issuesComponent";
+import "./homePage.css";
+import InsightsComponent from "./insightsComponent";
+import MoreIcon from "@atlaskit/icon/glyph/more";
+import Button from "@atlaskit/button";
+import DropdownMenu, {
+  DropdownItem,
+  DropdownItemGroup,
+} from "@atlaskit/dropdown-menu";
+import ProgressDisplay from "./progressDisplay";
+
 const percentageOfTasks = (total, value) => {
   return Math.round((value / total) * 100);
 };
-const UserJobAllocation = (props) => {
+const HomePage = (props) => {
   const [userEmpData, setEmpData] = useState();
   useEffect(() => {
     setEmpData(userAllocationHomePage);
@@ -21,7 +30,9 @@ const UserJobAllocation = (props) => {
   const issueList = !!userEmpData?.root?.unAssignedIssues
     ? userEmpData?.root?.unAssignedIssues
     : [];
-
+  const userInsights = !!userEmpData?.root?.usersInsights
+    ? userEmpData?.root?.usersInsights
+    : [];
   if (!!userEmpData?.root?.sprintProgress) {
     issuesAssigned = percentageOfTasks(total, assigned);
     issuesNotAssigned = 100 - issuesAssigned;
@@ -72,88 +83,46 @@ const UserJobAllocation = (props) => {
                 </CardBody>
               </Card>
             </Col>
-            <Col xs={0} sm={4}></Col>
             <Col xs={7} sm={5}>
-              <Card>
-                <CardBody
-                  style={{ backgroundColor: "#EBECF0", padding: "5px 10px" }}
-                >
-                  <p className="card-title">Progress Tracker</p>
-                  <Row style={{ justifyContent: "center" }}>
-                    <Col xs={4} className="middle-padding">
-                      <Card
-                        style={{
-                          fontWeight: "600",
-                          color: "#5E6C84",
-                        }}
-                      >
-                        <CardBody className="tab">
-                          <p className="tab-header">Todo</p>
-                          {`${issueTodo}%`}
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col xs={4} className="middle-padding">
-                      <Card
-                        style={{
-                          fontWeight: "600",
-                          color: "#0052cc",
-                        }}
-                      >
-                        <CardBody className="tab">
-                          <p className="tab-header">Progress</p>
-                          {`${issueProgress}%`}
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col xs={4} className="middle-padding">
-                      <Card
-                        style={{
-                          fontWeight: "600",
-                          color: "#36B37E",
-                        }}
-                      >
-                        <CardBody className="tab">
-                          <p className="tab-header">Done</p>
-                          {`${issueDone}%`}
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
+              <ProgressDisplay
+                emphasized
+                issueDone={issueDone}
+                issueTodo={issueTodo}
+                issueProgress={issueProgress}
+              />
+            </Col>
+            <Col xs={12} sm={4}>
+              <DropdownMenu
+                trigger={({ triggerRef, ...props }) => (
+                  <Button
+                    {...props}
+                    className="float-end mx-2"
+                    iconBefore={<MoreIcon label="more" />}
+                    ref={triggerRef}
+                  />
+                )}
+              >
+                <DropdownItemGroup>
+                  {/* <DropdownItem description="Previous versions are saved">
+                    Edit
+                  </DropdownItem> */}
+                  <DropdownItem>Settings</DropdownItem>
+                  {/* <DropdownItem>Clone</DropdownItem> */}
+                </DropdownItemGroup>
+              </DropdownMenu>
+              <Button className="float-end">Daily Standup</Button>
             </Col>
           </Row>
           <Row style={{ marginTop: "10px" }}>
             <Col xs={12}>
-              <Card
-                style={{
-                  backgroundColor: "#ebecf0",
-                  border: "5px solid #ebecf0",
-                  borderRadius: "10px",
-                }}
-              >
-                <div className="heading">Issues</div>
-                <Card
-                  style={{ backgroundColor: "#ffffff", borderRadius: "10px", padding:'13px' }}
-                >
-                  <IssueTable issueList={issueList} />
-                </Card>
-              </Card>
+              <IssuesComponent issueList={issueList} />
             </Col>
           </Row>
         </Col>
         <Col xs={12} md={4}>
           <Row>
             <Col xs={12}>
-              <div className="heading">Insights</div>
-              <Card
-                style={{ border: "5px solid #ebecf0", borderRadius: "10px" }}
-              >
-                <div
-                  style={{ height: "300px", backgroundColor: "#ffffff" }}
-                ></div>
-              </Card>
+              <InsightsComponent userInsights={userInsights} />
             </Col>
           </Row>
         </Col>
@@ -162,4 +131,4 @@ const UserJobAllocation = (props) => {
   );
 };
 
-export default UserJobAllocation;
+export default HomePage;
