@@ -19,7 +19,6 @@ const HomePage = (props) => {
   let location = useLocation();
   useEffect(() => {
     setEmpData(userAllocationHomePage); //API
-    console.log('Gets fired again');
   }, []);
   const { total, todo, progress, assigned } =
     userEmpData?.root?.sprintProgress ?? {};

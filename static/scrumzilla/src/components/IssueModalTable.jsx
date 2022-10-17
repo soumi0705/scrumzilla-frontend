@@ -72,7 +72,7 @@ const IssueModalTable = (props) => {
                     fontSize: "inherit",
                   }}
                   onClick={(e) => {
-                    console.log(`Clicked`);
+                    setAssignee();
                   }}
                 >
                   Set as Assignee
