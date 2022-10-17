@@ -7,7 +7,7 @@ const IssuesComponent = (props) => {
       style={{
         backgroundColor: "#ebecf0",
         border: "5px solid #ebecf0",
-        borderRadius: "10px",
+        borderRadius: "10px",marginBottom:"10px"
       }}
       className = "issuesComponent"
     >

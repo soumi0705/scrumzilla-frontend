@@ -27,9 +27,9 @@ const InsightsComponent = (props) => {
         <Row>
           <Col
             xs={12}
-            md={8}
+            md={10}
             className={
-              "d-flex offset-md-4 align-items-center justify-content-end"
+              "d-flex offset-md-2 align-items-center justify-content-end"
             }
           >
             {`Compare with :`}
@@ -40,7 +40,7 @@ const InsightsComponent = (props) => {
               className="compare-select"
               classNamePrefix="user-select"
               options={[
-                { label: "Previous User Data", value: "userPreviousData" },
+                { label: "User Data", value: "userPreviousData" },
                 { label: "All Users", value: "allUser" },
                 { label: "Sprint Limit", value: "sprintLimit" },
               ]}

@@ -5,6 +5,7 @@ import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
 import "./issueTable.css";
 import { percentageOfTasks } from "./helpers/percentageOfTasks";
+import { User } from "@forge/ui";
 
 const IssueModalTable = (props) => {
   const { recommendations } = props ?? {};
@@ -29,6 +30,9 @@ const IssueModalTable = (props) => {
             totalLabelScore === 0
               ? 0
               : percentageOfTasks(totalLabelScore, user?.labelScore);
+          const userRemark = user?.storypoint?.remarkCompareWith?.userPreviousData
+          ?.remark;
+          const assignmentSeverity = userRemark?.toUpperCase()?.includes("OVER")? true:false;
           return (
             <tr key={index}>
               <td>
@@ -62,7 +66,13 @@ const IssueModalTable = (props) => {
               </td>
               <td className="text-center">{`${labelScore}%`}</td>
               <td>
-                <Lozenge>{`Remark`}</Lozenge>
+                <Lozenge
+                  appearance={assignmentSeverity ? "removed" : "default"}
+                >
+                  {
+                    userRemark
+                  }
+                </Lozenge>
               </td>
               <td>
                 <Button
