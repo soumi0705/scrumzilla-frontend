@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Card, CardBody } from "reactstrap";
-import { userAllocationHomePage } from "./mocks/mockData";
+import { userAllocationHomePage, issueModalData } from "./mocks/mockData";
 import IssuesComponent from "./issuesComponent";
-import "./homePage.css";
 import InsightsComponent from "./insightsComponent";
 import MoreIcon from "@atlaskit/icon/glyph/more";
 import Button from "@atlaskit/button";
@@ -11,14 +10,26 @@ import DropdownMenu, {
   DropdownItemGroup,
 } from "@atlaskit/dropdown-menu";
 import ProgressDisplay from "./progressDisplay";
+import { percentageOfTasks } from "./helpers/percentageOfTasks";
+import {
+  ModalTransition,
+} from "@atlaskit/modal-dialog";
+import "./homePage.css";
+import IssueModal from "./issueModal";
 
-const percentageOfTasks = (total, value) => {
-  return Math.round((value / total) * 100);
-};
 const HomePage = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [userEmpData, setEmpData] = useState();
+  const [issueData, setIssueData] = useState(issueModalData);
+  const openModal = (id) => {
+    console.log(`Opening modal for ${id} !`);
+    setIssueData(issueModalData); //API
+    setIsOpen(true);
+  };
+  const closeModal = () => setIsOpen(false);
+
   useEffect(() => {
-    setEmpData(userAllocationHomePage);
+    setEmpData(userAllocationHomePage); //API
   }, []);
   const { total, todo, progress, assigned } =
     userEmpData?.root?.sprintProgress ?? {};
@@ -43,6 +54,11 @@ const HomePage = (props) => {
 
   return (
     <div style={{ width: "95%" }}>
+      <ModalTransition>
+        {isOpen && (
+          <IssueModal issueData={issueData} closeModal={closeModal}/>
+        )}
+      </ModalTransition>
       <Row>
         <Col xs={12} md={8}>
           <Row>
@@ -115,7 +131,7 @@ const HomePage = (props) => {
           </Row>
           <Row style={{ marginTop: "10px" }}>
             <Col xs={12}>
-              <IssuesComponent issueList={issueList} />
+              <IssuesComponent issueList={issueList} openModal={openModal} />
             </Col>
           </Row>
         </Col>

@@ -19,7 +19,7 @@ const IssuesComponent = (props) => {
           padding: "13px",
         }}
       >
-        <IssueTable issueList={props.issueList} />
+        <IssueTable issueList={props.issueList} openModal={props.openModal}/>
       </Card>
     </Card>
   );
