@@ -1,8 +1,10 @@
 import React from "react";
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
 import Badge from "@atlaskit/badge";
 import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
+import Button from "@atlaskit/button";
+import { Link } from "react-router-dom";
 import "./issueTable.css";
 
 const IssueTable = (props) => {
@@ -57,13 +59,14 @@ const IssueTable = (props) => {
                 <td>
                   <Button
                     style={{
-                      backgroundColor: "#0052cc",
-                      padding: "3px 10px",
                       fontSize: "inherit",
                     }}
-                    onClick={(e) => {
-                      openModal(issue?.id);
-                    }}
+                    appearance="primary"
+                    // onClick={(e) => {
+                    //   openModal(issue?.id);
+                    // }}
+                    component={Link}
+                    to = {`issue/${issue?.id}`}
                   >
                     Set Assignee
                   </Button>

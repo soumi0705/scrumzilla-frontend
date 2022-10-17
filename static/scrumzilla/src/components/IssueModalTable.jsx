@@ -3,12 +3,11 @@ import { Table, Button } from "reactstrap";
 import Badge from "@atlaskit/badge";
 import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
-import "./issueModalTable.css";
+import "./issueTable.css";
 import { percentageOfTasks } from "./helpers/percentageOfTasks";
 
 const IssueModalTable = (props) => {
   const { recommendations } = props ?? {};
-  console.log(recommendations);
   const totalLabelScore = recommendations?.reduce(
     (userA, userB) => userA.labelScore + userB.labelScore
   );

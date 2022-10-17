@@ -1,22 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { invoke } from "@forge/bridge";
+// import React, { useEffect, useState } from "react";
+// import { invoke } from "@forge/bridge";
+
+// function App() {
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     invoke("getText", { example: "my-invoke-variable" }).then((data) => {
+//       console.log(data);
+//       setData(data);
+//     });
+//   }, []);
+
+//   return (
+//     <div className="App">
+//       <HomePage />
+//     </div>
+//   );
+// }
+
+
+import React, { Fragment, useEffect, useState } from "react";
+import { view } from "@forge/bridge";
+import { Router, Route, Routes, useNavigate } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import HomePage from "./components/homePage";
+import IssueModal from "./components/issueModal";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [history, setHistory] = useState(null);
 
   useEffect(() => {
-    invoke("getText", { example: "my-invoke-variable" }).then((data) => {
-      console.log(data);
-      setData(data);
+    view.createHistory().then((newHistory) => {
+      setHistory(newHistory);
     });
   }, []);
 
+  const [historyState, setHistoryState] = useState(null);
+
+  useEffect(() => {
+    if (!historyState && history) {
+      setHistoryState({
+        action: history.action,
+        location: history.location,
+      });
+    }
+  }, [history, historyState]);
+
+  useEffect(() => {
+    if (history) {
+      history.listen((location, action) => {
+        setHistoryState({
+          action,
+          location,
+        });
+      });
+    }
+  }, [history]);
+
   return (
-    <div className="App">
-      <HomePage />
+    <div>
+      {history && historyState ? (
+        <Router
+          navigator={history}
+          navigationType={historyState.action}
+          location={historyState.location}
+        >
+          <Routes>
+            <Route path="/issue/:issueID" element={<IssueModal />}></Route>
+            <Route path="/" element={<HomePage />}></Route>
+          </Routes>
+        </Router>
+      ) : (
+        "Loading..."
+      )}
     </div>
   );
 }

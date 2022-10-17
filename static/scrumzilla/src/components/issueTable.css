@@ -1,6 +1,6 @@
 .table-responsive {
     overflow-y: auto;
-    height: 550px;
+    max-height: 435px;
   }
   .table-responsive thead th {
     position: sticky;
