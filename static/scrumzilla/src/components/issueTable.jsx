@@ -61,14 +61,14 @@ const IssueTable = (props) => {
                     style={{
                       fontSize: "inherit",
                     }}
-                    appearance="primary"
+                    appearance="link"
                     // onClick={(e) => {
                     //   openModal(issue?.id);
                     // }}
                     component={Link}
                     to = {`issue/${issue?.id}`}
                   >
-                    Set Assignee
+                    View
                   </Button>
                 </td>
               </tr>

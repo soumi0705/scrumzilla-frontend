@@ -41,7 +41,7 @@ const UserInsightCard = (props) => {
               position="bottom-start"
               content={userAssignmentStatus?.message}
             >
-              <Lozenge appearance={assignmentSeverity ? "removed" : "default"}>
+              <Lozenge appearance={assignmentSeverity ? "removed" : "success"}>
                 {userAssignmentStatus?.remark}
               </Lozenge>
             </Tooltip>

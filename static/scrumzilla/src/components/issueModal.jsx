@@ -3,6 +3,7 @@ import Button from "@atlaskit/button";
 import Badge from "@atlaskit/badge";
 import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
+import Select from "@atlaskit/select";
 import { Col, Row, Card } from "reactstrap";
 import styled from "styled-components";
 import IssueModalTable from "./IssueModalTable";
@@ -10,6 +11,7 @@ import ArrowLeftIcon from "@atlaskit/icon/glyph/arrow-left";
 import { Link, useParams } from "react-router-dom";
 import { issueModalData } from "./mocks/mockData";
 import { ReactRenderer } from "@atlaskit/renderer";
+import "./issueModal.css";
 const IssueHeaders = styled.div`
   margin-right: 20px;
   font-weight: 600;
@@ -34,6 +36,10 @@ const DescriptionBox = styled.div`
 const IssueModal = () => {
   const [issueData, setIssueData] = useState();
   const { issue, recommendations } = issueData?.root ?? {};
+  const [compareWith, setCompareWith] = useState({
+    label: "All Users",
+    value: "allUser",
+  });
   const { issueID } = useParams();
   useEffect(() => {
     setIssueData(issueModalData);
@@ -74,10 +80,13 @@ const IssueModal = () => {
               <IssueHeaders>Description</IssueHeaders>
             </Col>
             <Col xs={12} md={6}>
-              {issue?.description ? (<DescriptionBox>
-                <ReactRenderer document={issue?.description} />
-              </DescriptionBox>):'No Description'}
-              
+              {issue?.description ? (
+                <DescriptionBox>
+                  <ReactRenderer document={issue?.description} />
+                </DescriptionBox>
+              ) : (
+                "No Description"
+              )}
             </Col>
           </IssueRow>
           <IssueRow>
@@ -129,7 +138,33 @@ const IssueModal = () => {
                     padding: "13px",
                   }}
                 >
-                  <IssueModalTable recommendations={recommendations} />
+                  <Row>
+                    <Col
+                      xs={12}
+                      md={5}
+                      className={
+                        "d-flex offset-md-7 align-items-center justify-content-end"
+                      }
+                    >
+                      {`Compare with :`}
+                      <Select
+                        inputId="compare-with-selector"
+                        onChange={(value) => setCompareWith(value)}
+                        value={compareWith}
+                        className="compare-select"
+                        classNamePrefix="user-select"
+                        options={[
+                          { label: "User Data", value: "userPreviousData" },
+                          { label: "All Users", value: "allUser" },
+                          { label: "Sprint Limit", value: "sprintLimit" },
+                        ]}
+                      />
+                    </Col>
+                  </Row>
+                  <IssueModalTable
+                    recommendations={recommendations}
+                    compareWith={compareWith.value}
+                  />
                 </Card>
               </Card>
             </Col>

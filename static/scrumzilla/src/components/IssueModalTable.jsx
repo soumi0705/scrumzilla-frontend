@@ -5,10 +5,10 @@ import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
 import "./issueTable.css";
 import { percentageOfTasks } from "./helpers/percentageOfTasks";
-import { User } from "@forge/ui";
+import Tooltip from "@atlaskit/tooltip";
 
 const IssueModalTable = (props) => {
-  const { recommendations } = props ?? {};
+  const { recommendations, compareWith } = props ?? {};
   const totalLabelScore = recommendations?.reduce(
     (userA, userB) => userA.labelScore + userB.labelScore
   );
@@ -30,9 +30,13 @@ const IssueModalTable = (props) => {
             totalLabelScore === 0
               ? 0
               : percentageOfTasks(totalLabelScore, user?.labelScore);
-          const userRemark = user?.storypoint?.remarkCompareWith?.userPreviousData
-          ?.remark;
-          const assignmentSeverity = userRemark?.toUpperCase()?.includes("OVER")? true:false;
+          const userAssignmentStatus =
+            user?.storypoint?.remarkCompareWith[`${compareWith}`];
+          const assignmentSeverity = userAssignmentStatus?.remark
+            ?.toUpperCase()
+            ?.includes("OVER")
+            ? true
+            : false;
           return (
             <tr key={index}>
               <td>
@@ -66,13 +70,16 @@ const IssueModalTable = (props) => {
               </td>
               <td className="text-center">{`${labelScore}%`}</td>
               <td>
-                <Lozenge
-                  appearance={assignmentSeverity ? "removed" : "default"}
+                <Tooltip
+                  position="bottom-start"
+                  content={userAssignmentStatus?.message}
                 >
-                  {
-                    userRemark
-                  }
-                </Lozenge>
+                  <Lozenge
+                    appearance={assignmentSeverity ? "removed" : "success"}
+                  >
+                    {userAssignmentStatus?.remark}
+                  </Lozenge>
+                </Tooltip>
               </td>
               <td>
                 <Button
