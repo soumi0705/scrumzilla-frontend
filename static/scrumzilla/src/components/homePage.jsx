@@ -13,6 +13,7 @@ import ProgressDisplay from "./progressDisplay";
 import { percentageOfTasks } from "./helpers/percentageOfTasks";
 import { useLocation } from "react-router";
 import "./homePage.css";
+import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
   const [userEmpData, setEmpData] = useState();
@@ -110,7 +111,13 @@ const HomePage = (props) => {
                   {/* <DropdownItem>Clone</DropdownItem> */}
                 </DropdownItemGroup>
               </DropdownMenu>
-              <Button className="float-end">Daily Standup</Button>
+              <Button
+                className="float-end"
+                component={Link}
+                to={`/daily-standup`}
+              >
+                Daily Standup
+              </Button>
             </Col>
           </Row>
           <Row style={{ marginTop: "10px" }}>

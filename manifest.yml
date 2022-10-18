@@ -4,7 +4,13 @@ modules:
       resource: main
       resolver:
         function: resolver
-      title: Scrumzilla
+      title: Scrumzilla  
+  jira:issueActivity:
+    - key: my-updates-hello-world
+      resource: activity
+      resolver:
+        function: resolver
+      title: My-Updates-Scrumzilla
   function:
     - key: resolver
       handler: index.handler
@@ -13,6 +19,8 @@ resources:
     path: static/scrumzilla/build
     tunnel:
       port: 3000
+  - key: activity
+    path: static/scrum-updates/build
 app:
   id: ari:cloud:ecosystem::app/37cf66e1-691b-47dc-bea1-86f1c8a8eb61
 permissions:

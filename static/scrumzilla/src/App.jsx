@@ -18,14 +18,14 @@
 //   );
 // }
 
-
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { view } from "@forge/bridge";
-import { Router, Route, Routes, useNavigate } from "react-router";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Router, Route, Routes } from "react-router";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import HomePage from "./components/homePage";
 import IssueModal from "./components/issueModal";
+import DailyStandup from "./components/dailyStandupPage";
 
 function App() {
   const [history, setHistory] = useState(null);
@@ -68,6 +68,7 @@ function App() {
         >
           <Routes>
             <Route path="/issue/:issueID" element={<IssueModal />}></Route>
+            <Route path="/daily-standup" element={<DailyStandup />}></Route>
             <Route path="/" element={<HomePage />}></Route>
           </Routes>
         </Router>
