@@ -9,11 +9,13 @@ import ProgressDisplay from "./progressDisplay";
 import "./userInsightsCard.css";
 
 const UserInsightCard = (props) => {
-  const { userInsight, compareWith } = props ?? {};
+  const { userInsight, compareWith, minimal } = props ?? {};
   const { total, todo, progress } = userInsight?.progress ?? {};
   const userAssignmentStatus =
     userInsight?.storypoint?.remarkCompareWith[`${compareWith}`];
-  const assignmentSeverity = userAssignmentStatus.remark.toUpperCase().includes("OVER")
+  const assignmentSeverity = userAssignmentStatus.remark
+    .toUpperCase()
+    .includes("OVER")
     ? true
     : false;
   const userTodo = percentageOfTasks(total, todo);
@@ -22,9 +24,16 @@ const UserInsightCard = (props) => {
   const userTotal = total;
   const userStoryPoints = userInsight?.storypoint?.sprintTotal;
   return (
-    <Card className="mt-2 p-3">
+    <Card
+      style={{
+        border: minimal ? "none" : "auto",
+        padding: "10px",
+      }}
+      className={!minimal ? "mt-2 p-3" : "mt-2 hover"}
+      onClick={() => props?.onClickChangeUser(props?.id_)}
+    >
       <Row>
-        <Col xs={8}>
+        <Col xs={minimal ? 12 : 8}>
           <CardTitle className="d-flex align-items-center fs-5">
             <Avatar
               appearance="circle"
@@ -34,63 +43,85 @@ const UserInsightCard = (props) => {
             />
             <div className="ms-2 md-d-block">{userInsight?.displayName}</div>
           </CardTitle>
+          {minimal && (
+            <Row>
+              <Col xs={6} className="ms-4">
+                <ProgressDisplay
+                  issueDone={userDone}
+                  issueTodo={userTodo}
+                  issueProgress={userProgress}
+                />
+              </Col>
+            </Row>
+          )}
         </Col>
-        <Col xs={4}>
-          <div className="float-end">
-            <Tooltip
-              position="bottom-start"
-              content={userAssignmentStatus?.message}
+        {!minimal && (
+          <Col xs={4}>
+            <div className="float-end">
+              <Tooltip
+                position="bottom-start"
+                content={userAssignmentStatus?.message}
+              >
+                <Lozenge
+                  appearance={assignmentSeverity ? "removed" : "success"}
+                >
+                  {userAssignmentStatus?.remark}
+                </Lozenge>
+              </Tooltip>
+            </div>
+          </Col>
+        )}
+      </Row>
+      {!minimal && (
+        <Row>
+          <Col xs={12}>
+            <div
+              className="text-start ms-2 d-flex"
+              style={{ fontSize: "10px" }}
             >
-              <Lozenge appearance={assignmentSeverity ? "removed" : "success"}>
-                {userAssignmentStatus?.remark}
-              </Lozenge>
-            </Tooltip>
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <div className="text-start ms-2 d-flex" style={{ fontSize: "10px" }}>
-            <div
-              style={{ color: "#0052cc", marginRight: "2px" }}
-            >{`${userTotal}`}</div>
-            {`Issues Assigned`}
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6}>
-          <ProgressDisplay
-            issueDone={userDone}
-            issueTodo={userTodo}
-            issueProgress={userProgress}
-          />
-        </Col>
-        <Col xs={6} md={5} className="offset-md-1 d-flex align-items-end">
-          <CardBody
-            className="d-flex text-end"
-            style={{
-              fontSize: "14px",
-              paddingLeft: "0",
-              paddingRight: "0",
-              justifyContent: "flex-end",
-              width: "inherit",
-            }}
-          >
-            <div
+              <div
+                style={{ color: "#0052cc", marginRight: "2px" }}
+              >{`${userTotal}`}</div>
+              {`Issues Assigned`}
+            </div>
+          </Col>
+        </Row>
+      )}
+      {!minimal && (
+        <Row>
+          <Col xs={6}>
+            <ProgressDisplay
+              issueDone={userDone}
+              issueTodo={userTodo}
+              issueProgress={userProgress}
+            />
+          </Col>
+          <Col xs={6} md={5} className="offset-md-1 d-flex align-items-end">
+            <CardBody
+              className="d-flex text-end"
               style={{
-                marginRight: "5px",
-                overflow: "hidden",
-                whiteSpace: "pre",
-                textOverflow: "ellipsis",
+                fontSize: "14px",
+                paddingLeft: "0",
+                paddingRight: "0",
+                justifyContent: "flex-end",
+                width: "inherit",
               }}
-            >{`Total Story points`}</div>
-            <Badge appearance="primary">
-              <div style={{ padding: "2px" }}>{userStoryPoints}</div>
-            </Badge>
-          </CardBody>
-        </Col>
-      </Row>
+            >
+              <div
+                style={{
+                  marginRight: "5px",
+                  overflow: "hidden",
+                  whiteSpace: "pre",
+                  textOverflow: "ellipsis",
+                }}
+              >{`Total Story points`}</div>
+              <Badge appearance="primary">
+                <div style={{ padding: "2px" }}>{userStoryPoints}</div>
+              </Badge>
+            </CardBody>
+          </Col>
+        </Row>
+      )}
     </Card>
   );
 };

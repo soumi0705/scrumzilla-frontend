@@ -26,6 +26,7 @@ import "./App.css";
 import HomePage from "./components/homePage";
 import IssueModal from "./components/issueModal";
 import DailyStandup from "./components/dailyStandupPage";
+import Settings from "./components/settings";
 
 function App() {
   const [history, setHistory] = useState(null);
@@ -69,6 +70,7 @@ function App() {
           <Routes>
             <Route path="/issue/:issueID" element={<IssueModal />}></Route>
             <Route path="/daily-standup" element={<DailyStandup />}></Route>
+            <Route path="/settings/:settingType" element={<Settings />}></Route>
             <Route path="/" element={<HomePage />}></Route>
           </Routes>
         </Router>

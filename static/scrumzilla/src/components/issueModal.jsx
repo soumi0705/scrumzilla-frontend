@@ -8,9 +8,15 @@ import { Col, Row, Card } from "reactstrap";
 import styled from "styled-components";
 import IssueModalTable from "./IssueModalTable";
 import ArrowLeftIcon from "@atlaskit/icon/glyph/arrow-left";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { issueModalData } from "./mocks/mockData";
 import { ReactRenderer } from "@atlaskit/renderer";
+import SuccessIcon from "@atlaskit/icon/glyph/check-circle";
+import ErrorIcon from '@atlaskit/icon/glyph/error';
+import { G300, R400 } from "@atlaskit/theme/colors";
+import { token } from "@atlaskit/tokens";
+import { AutoDismissFlag, FlagGroup } from "@atlaskit/flag";
+import { useParams } from 'react-router-dom';
 import "./issueModal.css";
 const IssueHeaders = styled.div`
   margin-right: 20px;
@@ -36,16 +42,56 @@ const DescriptionBox = styled.div`
 const IssueModal = () => {
   const [issueData, setIssueData] = useState();
   const { issue, recommendations } = issueData?.root ?? {};
+  const [showFlag, setShowFlag] = useState(false);
+  const [flagContent, setFlagContent] = useState({
+    title: "Assignee was set successfully!",
+    description: "Soumitro Datta was set as an assignee",
+    condition : true,
+  });
+  const {issueID} = useParams();
   const [compareWith, setCompareWith] = useState({
     label: "All Users",
     value: "allUser",
   });
-  const { issueID } = useParams();
   useEffect(() => {
+    console.log(issueID);
     setIssueData(issueModalData);
   }, []);
+
+  const addFlag = () => {
+    setShowFlag(true);
+  };
+
+  const handleDismiss = () => {
+    setShowFlag(false);
+  };
   return (
     <div style={{ width: "95%" }}>
+      <FlagGroup onDismissed={handleDismiss}>
+        {showFlag && (
+          <AutoDismissFlag
+            id={`success_flag`}
+            appearance = "normal"
+            icon={
+              flagContent.condition ? (
+                <SuccessIcon
+                  primaryColor={token("color.icon.success", G300)}
+                  label="Success"
+                  size="medium"
+                />
+              ) : (
+                <ErrorIcon
+                  label="Error"
+                  primaryColor={token("color.icon.danger", R400)}
+                  size="medium"
+                />
+              )
+            }
+            title={flagContent.title}
+            description={flagContent.description}
+          />
+        )}
+      </FlagGroup>
       <Button
         style={{ fontSize: "14px", paddingLeft: "0px" }}
         iconBefore={<ArrowLeftIcon label="" size="medium" />}
@@ -60,14 +106,14 @@ const IssueModal = () => {
           <TitleRow>{issue?.summary}</TitleRow>
 
           <IssueRow>
-            <Col xs={6} className="d-flex align-items-center">
+            <Col xs={4} className="d-flex align-items-center">
               <IssueHeaders>Type</IssueHeaders>
               <img
                 src={issue?.issuetype?.iconUrl}
                 alt={`${issue?.issuetype?.name}`}
               />
             </Col>
-            <Col xs={6} className="d-flex align-items-center">
+            <Col xs={8} className="d-flex align-items-center">
               <IssueHeaders>Priority</IssueHeaders>
               <img
                 src={issue?.priority?.iconUrl}
@@ -90,7 +136,7 @@ const IssueModal = () => {
             </Col>
           </IssueRow>
           <IssueRow>
-            <Col xs={6} className="d-flex align-items-center">
+            <Col xs={4} className="d-flex align-items-center">
               <IssueHeaders>Reporter</IssueHeaders>
               <Avatar
                 appearance="circle"
@@ -102,7 +148,7 @@ const IssueModal = () => {
                 {issue?.reporter?.displayName}
               </div>
             </Col>
-            <Col xs={6} className="d-flex align-items-center">
+            <Col xs={8} className="d-flex align-items-center">
               <IssueHeaders>Story Point</IssueHeaders>
 
               <Badge appearance="primary">{issue?.storypoint}</Badge>
@@ -164,6 +210,8 @@ const IssueModal = () => {
                   <IssueModalTable
                     recommendations={recommendations}
                     compareWith={compareWith.value}
+                    addFlag={addFlag}
+                    setFlagContent={setFlagContent}
                   />
                 </Card>
               </Card>

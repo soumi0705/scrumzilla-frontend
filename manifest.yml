@@ -33,5 +33,6 @@ permissions:
       - 'unsafe-inline'
   external:
     images:
-      - 'https://my-jira-app.atlassian.net'
+      - 'https://*.atlassian.net'
       - 'https://i2.wp.com/'
+      - 'https://api.atlassian.com/'

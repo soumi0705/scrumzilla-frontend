@@ -9,6 +9,7 @@
     "@atlaskit/button": "^16.3.9",
     "@atlaskit/css-reset": "^6.0.1",
     "@atlaskit/dropdown-menu": "^11.5.1",
+    "@atlaskit/form": "^8.6.0",
     "@atlaskit/icon": "^21.11.0",
     "@atlaskit/link-provider": "^1.2.9",
     "@atlaskit/lozenge": "^11.2.4",

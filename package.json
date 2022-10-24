@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "deploy": "nvm use 16 && forge deploy"
+  },
   "dependencies": {
     "@forge/api": "^2.6.0",
     "@forge/resolver": "^1.4.2",

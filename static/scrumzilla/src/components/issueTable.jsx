@@ -23,7 +23,7 @@ const IssueTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {issueList?.map((issue, index) => {
+          {issueList?.length>0 ? issueList?.map((issue, index) => {
             return (
               <tr key={index}>
                 <td>
@@ -73,7 +73,7 @@ const IssueTable = (props) => {
                 </td>
               </tr>
             );
-          })}
+          }): <tr><td colSpan={7} className="fs-5 text-center" style={{fontWeight:"500", color:"#253858"}}>Hurray no unassigned issues left !</td></tr>}
         </tbody>
       </Table>
   );

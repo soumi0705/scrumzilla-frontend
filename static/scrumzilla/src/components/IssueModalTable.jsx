@@ -8,10 +8,26 @@ import { percentageOfTasks } from "./helpers/percentageOfTasks";
 import Tooltip from "@atlaskit/tooltip";
 
 const IssueModalTable = (props) => {
-  const { recommendations, compareWith } = props ?? {};
+  const { recommendations, compareWith, addFlag, setFlagContent } = props ?? {};
   const totalLabelScore = recommendations?.reduce(
     (userA, userB) => userA.labelScore + userB.labelScore
   );
+  const setAssignee = (name) => {
+    const err = false;
+    setFlagContent({
+      title:"Assignee was set successfully!",
+      description: `${name} was set as an assignee.`,
+      condition: true
+    })
+    if (err) {
+      setFlagContent({
+        title: "Assignee could not be set!",
+        description: `The functionality failed because of: Network Error`,
+        condition: false,
+      });
+    }
+    addFlag();
+  };
   return (
     <Table borderless responsive className="text-start">
       <thead>
@@ -68,7 +84,7 @@ const IssueModalTable = (props) => {
                   {user?.storypoint?.sprintTotal}
                 </Badge>
               </td>
-              <td className="text-center">{`${labelScore}%`}</td>
+              <td className="text-center">{`${labelScore}`}</td>
               <td>
                 <Tooltip
                   position="bottom-start"
@@ -89,7 +105,7 @@ const IssueModalTable = (props) => {
                     fontSize: "inherit",
                   }}
                   onClick={(e) => {
-                    setAssignee();
+                    setAssignee(user?.displayName);
                   }}
                 >
                   Set as Assignee

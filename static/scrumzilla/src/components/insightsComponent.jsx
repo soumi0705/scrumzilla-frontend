@@ -5,8 +5,12 @@ import "./insightComponent.css";
 import UserInsightCard from "./userInsightCard";
 
 const InsightsComponent = (props) => {
-  const [compareWith, setCompareWith] = useState({label: 'All Users', value: 'allUser'});
+  const [compareWith, setCompareWith] = useState({
+    label: "All Users",
+    value: "allUser",
+  });
   const userInsightsArray = props?.userInsights;
+  const minimal = props?.minimal ?? false;
   return (
     <Card
       style={{
@@ -16,7 +20,9 @@ const InsightsComponent = (props) => {
       }}
       className="insightsComponent"
     >
-      <div className="heading">Insights</div>
+      <div className="heading">
+        {props?.heading?`${props?.heading}(${userInsightsArray?.length})`: "Insights"}
+      </div>
       <Card
         style={{
           backgroundColor: "#ffffff",
@@ -24,34 +30,39 @@ const InsightsComponent = (props) => {
           padding: "13px",
         }}
       >
-        <Row>
-          <Col
-            xs={12}
-            md={10}
-            className={
-              "d-flex offset-md-2 align-items-center justify-content-end"
-            }
-          >
-            {`Compare with :`}
-            <Select
-              inputId="compare-with-selector"
-              onChange={(value) => setCompareWith(value)}
-              value={compareWith}
-              className="compare-select"
-              classNamePrefix="user-select"
-              options={[
-                { label: "User Data", value: "userPreviousData" },
-                { label: "All Users", value: "allUser" },
-                { label: "Sprint Limit", value: "sprintLimit" },
-              ]}
-            />
-          </Col>
-        </Row>
+        {!minimal && (
+          <Row>
+            <Col
+              xs={12}
+              md={10}
+              className={
+                "d-flex offset-md-2 align-items-center justify-content-end"
+              }
+            >
+              {`Compare with :`}
+              <Select
+                inputId="compare-with-selector"
+                onChange={(value) => setCompareWith(value)}
+                value={compareWith}
+                className="compare-select"
+                classNamePrefix="user-select"
+                options={[
+                  { label: "User Data", value: "userPreviousData" },
+                  { label: "All Users", value: "allUser" },
+                  { label: "Sprint Limit", value: "sprintLimit" },
+                ]}
+              />
+            </Col>
+          </Row>
+        )}
         {userInsightsArray?.map((userInsight, index) => (
           <UserInsightCard
+            onClickChangeUser={props?.onClickChangeUser}
+            id_={index}
             key={index}
             userInsight={userInsight}
             compareWith={compareWith.value}
+            minimal={minimal}
           />
         ))}
       </Card>
