@@ -1351,7 +1351,7 @@
     react-intl-next "npm:react-intl@^5.18.1"
     uuid "^3.1.0"
 
-"@atlaskit/spinner@^15.0.0", "@atlaskit/spinner@^15.1.0", "@atlaskit/spinner@^15.1.4":
+"@atlaskit/spinner@^15.0.0", "@atlaskit/spinner@^15.1.0", "@atlaskit/spinner@^15.1.16", "@atlaskit/spinner@^15.1.4":
   version "15.1.16"
   resolved "https://registry.yarnpkg.com/@atlaskit/spinner/-/spinner-15.1.16.tgz#c08e5b6ff6334d34566779771a96e9a542266fc1"
   integrity sha512-H9+ZGVuQdg3731GsK4lkDxhBf5TKoS1IwS1mzKatzFclzRfepjQO7CRRIVY4krVPqGy4O0SJVBu4XjZSBcZn4Q==

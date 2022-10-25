@@ -9,9 +9,9 @@ import DropdownMenu, {
   DropdownItem,
   DropdownItemGroup,
 } from "@atlaskit/dropdown-menu";
+import Spinner from "@atlaskit/spinner";
 import ProgressDisplay from "./progressDisplay";
 import { percentageOfTasks } from "./helpers/percentageOfTasks";
-import { useLocation } from "react-router";
 import SectionMessage from "@atlaskit/section-message";
 import "./homePage.css";
 import { Link } from "react-router-dom";
@@ -21,8 +21,11 @@ const HomePage = (props) => {
   const [appError, setAppError] = useState();
   useEffect(() => {
     if (false) {
-      setAppError(errorHomePageData.root1);
-    } else setEmpData(userAllocationHomePage); //API
+      setAppError(errorHomePageData.root);
+    } else
+      setTimeout(() => {
+        setEmpData(userAllocationHomePage);
+      }, 5000); //API
   }, []);
   const { total, todo, progress, assigned } =
     userEmpData?.root?.sprintProgress ?? {};
@@ -62,15 +65,13 @@ const HomePage = (props) => {
               : "Go to Backlog > click on Create sprint > add or create issues > click on Start sprint."}
           </div>
         </SectionMessage>
-      ) : (
+      ) : userEmpData ? (
         <Row>
           <Col xs={12} md={8}>
             <Row>
               <Col xs={5} sm={3}>
-                <Card style={{border:"none" }}>
-                  <CardBody
-                    style={{ backgroundColor: "#F5F5F6", padding: "5px 10px"}}
-                  >
+                <Card style={{ backgroundColor: "#F5F5F6", border: "none" }}>
+                  <CardBody style={{ padding: "5px 10px" }}>
                     <p className="tab-title">Ticket Tracker</p>
                     <Row style={{ justifyContent: "center" }}>
                       <Col xs={6} className="middle-padding rounded-2">
@@ -164,6 +165,15 @@ const HomePage = (props) => {
             </Row>
           </Col>
         </Row>
+      ) : (
+        <div
+          style={{ width: "95%", height: "80vh" }}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <div>
+            <Spinner size={"large"} />
+          </div>
+        </div>
       )}
     </div>
   );

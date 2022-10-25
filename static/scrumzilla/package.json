@@ -22,6 +22,7 @@
     "@atlaskit/renderer": "^102.0.0",
     "@atlaskit/select": "^15.7.3",
     "@atlaskit/smart-card": "17.0.0",
+    "@atlaskit/spinner": "^15.1.16",
     "@atlaskit/textfield": "^5.3.0",
     "@atlaskit/tooltip": "^17.6.0",
     "@forge/bridge": "^2.4.0",

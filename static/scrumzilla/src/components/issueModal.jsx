@@ -12,11 +12,12 @@ import { Link } from "react-router-dom";
 import { issueModalData } from "./mocks/mockData";
 import { ReactRenderer } from "@atlaskit/renderer";
 import SuccessIcon from "@atlaskit/icon/glyph/check-circle";
-import ErrorIcon from '@atlaskit/icon/glyph/error';
+import ErrorIcon from "@atlaskit/icon/glyph/error";
 import { G300, R400 } from "@atlaskit/theme/colors";
 import { token } from "@atlaskit/tokens";
 import { AutoDismissFlag, FlagGroup } from "@atlaskit/flag";
-import { useParams } from 'react-router-dom';
+import Spinner from "@atlaskit/spinner";
+import { useParams } from "react-router-dom";
 import "./issueModal.css";
 const IssueHeaders = styled.div`
   margin-right: 20px;
@@ -46,16 +47,18 @@ const IssueModal = () => {
   const [flagContent, setFlagContent] = useState({
     title: "Assignee was set successfully!",
     description: "Soumitro Datta was set as an assignee",
-    condition : true,
+    condition: true,
   });
-  const {issueID} = useParams();
+  const { issueID } = useParams();
   const [compareWith, setCompareWith] = useState({
     label: "All Users",
     value: "allUser",
   });
   useEffect(() => {
     console.log(issueID);
-    setIssueData(issueModalData);
+    setTimeout(() => {
+      setIssueData(issueModalData);
+    }, 5000); //API
   }, []);
 
   const addFlag = () => {
@@ -65,13 +68,13 @@ const IssueModal = () => {
   const handleDismiss = () => {
     setShowFlag(false);
   };
-  return (
+  return issueData ? (
     <div style={{ width: "95%" }}>
       <FlagGroup onDismissed={handleDismiss}>
         {showFlag && (
           <AutoDismissFlag
             id={`success_flag`}
-            appearance = "normal"
+            appearance="normal"
             icon={
               flagContent.condition ? (
                 <SuccessIcon
@@ -185,7 +188,7 @@ const IssueModal = () => {
                   style={{
                     backgroundColor: "#ffffff",
                     borderRadius: "10px",
-                    border:"none",
+                    border: "none",
                     padding: "13px",
                   }}
                 >
@@ -223,6 +226,15 @@ const IssueModal = () => {
             </Col>
           </IssueRow>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div
+      style={{ width: "95%", height: "80vh" }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <div>
+        <Spinner size={"large"} />
       </div>
     </div>
   );

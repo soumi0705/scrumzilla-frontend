@@ -20,6 +20,7 @@ import DropdownMenu, {
   DropdownItemGroup,
 } from "@atlaskit/dropdown-menu";
 import MoreIcon from "@atlaskit/icon/glyph/more";
+import Spinner from "@atlaskit/spinner";
 import "./dailyStandupPage.css";
 
 function DailyStandup() {
@@ -37,7 +38,9 @@ function DailyStandup() {
   const [update, setUpdate] = useState();
   const [onTimerComplete, setTimerComplete] = useState(false);
   useEffect(() => {
-    setStandupData(dailyStandup.root);
+    setTimeout(() => {
+      setStandupData(dailyStandup.root);
+    }, 5000); //API
   }, []);
 
   const { issues, insights, standupDetails } = standupData ?? {};
@@ -98,7 +101,7 @@ function DailyStandup() {
   };
 
   console.log("userInsight", userInsight, "update", update);
-  return (
+  return standupData ? (
     <div style={{ width: "95%" }}>
       <FlagGroup onDismissed={handleDismiss}>
         {showFlag && (
@@ -142,7 +145,11 @@ function DailyStandup() {
                 addFlag={addFlag}
                 expired={() => setTimerComplete(true)}
               />
-              <Button className="ms-3" style={{ fontSize: "14px" }} appearance="primary">
+              <Button
+                className="ms-3"
+                style={{ fontSize: "14px" }}
+                appearance="primary"
+              >
                 Complete
               </Button>
             </div>
@@ -442,7 +449,7 @@ function DailyStandup() {
                 <Card
                   style={{
                     backgroundColor: "#ffffff",
-                    border:"none",
+                    border: "none",
                     borderRadius: "10px",
                     padding: "2px",
                   }}
@@ -459,6 +466,15 @@ function DailyStandup() {
           </Row>
         </Col>
       </Row>
+    </div>
+  ) : (
+    <div
+      style={{ width: "95%", height: "80vh" }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <div>
+        <Spinner size={"large"} />
+      </div>
     </div>
   );
 }

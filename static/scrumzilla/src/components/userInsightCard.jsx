@@ -27,6 +27,7 @@ const UserInsightCard = (props) => {
     <Card
       style={{
         padding: "10px",
+        borderColor:"#f5f5f6"
       }}
       className={!minimal ? "mt-2 p-3 " : "mt-2 hover"}
       onClick={() => props?.onClickChangeUser(props?.id_)}

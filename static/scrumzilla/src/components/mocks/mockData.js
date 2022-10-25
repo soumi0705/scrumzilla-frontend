@@ -646,6 +646,11 @@ export const errorHomePageData = {
     "key": "TEST-4",
     "summary": "test 2",
     "error": "Story Point Estimation or Label fields are missing"
+  },
+  root2: {
+    "key": "",
+    "summary": "",
+    "error": "Story Point Estimation or Label fields are missing"
   }
 };
 
