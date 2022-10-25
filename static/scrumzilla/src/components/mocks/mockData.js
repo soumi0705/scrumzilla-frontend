@@ -2021,6 +2021,12 @@ export const dailyStandup = {
                   message:
                     "This card is blocked, it needs review ti proceed further",
                 },
+                {
+                  issueId: "10025",
+                  key: "KB-26",
+                  message:
+                    "Lol",
+                },
               ],
             },
           },
@@ -2035,6 +2041,57 @@ export const dailyStandup = {
                 },
               ],
               1: [],
+              2: [],
+            },
+          },
+        ],
+      },
+      {
+        standupId: 20221019,
+        created: "2022-10-19T04:45:04.520Z",
+        user: [
+          {
+            accountId: "6326e30c14c6b4b221099d1f",
+            standupUpdate: {
+              0: [
+                {
+                  issueId: "10025",
+                  key: "KB-26",
+                  message: "Yesterday standup",
+                },
+              ],
+              1: [],
+              2: [
+                {
+                  issueId: "10026",
+                  key: "KB-27",
+                  message:
+                    "No work only njoi",
+                },
+                {
+                  issueId: "10025",
+                  key: "KB-26",
+                  message:
+                    "Lol",
+                },
+              ],
+            },
+          },
+          {
+            accountId: "70121:1848c046-b89f-4f8f-a22f-846875694d2a",
+            standupUpdate: {
+              0: [
+                {
+                  issueId: "10025",
+                  key: "KB-26",
+                  message: "Completed backend on this one",
+                },
+              ],
+              1: [{
+                issueId: "10027",
+                key: "KB-28",
+                message: "Completed backend on this one",
+              },],
               2: [],
             },
           },

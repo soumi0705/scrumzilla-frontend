@@ -25,7 +25,7 @@ const IssueTable = (props) => {
         <tbody>
           {issueList?.length>0 ? issueList?.map((issue, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} style={{fontSize:"14px"}}>
                 <td>
                   <img
                     src={issue?.issuetype?.iconUrl}
@@ -53,8 +53,9 @@ const IssueTable = (props) => {
                     src={issue?.reporter?.avatarUrls["16x16"]}
                     name={issue?.reporter?.displayName}
                     size={"small"}
+                    
                   />
-                  {issue?.reporter?.displayName}
+                  <span className="ms-1">{issue?.reporter?.displayName}</span>
                 </td>
                 <td>
                   <Button

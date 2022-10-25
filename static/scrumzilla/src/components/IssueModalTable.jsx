@@ -1,5 +1,6 @@
 import React from "react";
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
+import Button from "@atlaskit/button";
 import Badge from "@atlaskit/badge";
 import Avatar from "@atlaskit/avatar";
 import Lozenge from "@atlaskit/lozenge";
@@ -54,17 +55,17 @@ const IssueModalTable = (props) => {
             ? true
             : false;
           return (
-            <tr key={index}>
+            <tr key={index} style={{fontSize:"14px"}}>
               <td>
                 <div className="d-flex align-items-center">
                   <Avatar
                     appearance="circle"
                     src={user?.avatarUrl}
                     name={user?.displayName}
-                    size={"medium"}
+                    size={"small"}
                   />
                   <div
-                    className="ms-2"
+                    className="ms-1"
                     style={{
                       overflow: "hidden",
                       whiteSpace: "pre",
@@ -100,10 +101,11 @@ const IssueModalTable = (props) => {
               <td>
                 <Button
                   style={{
-                    backgroundColor: "#0052cc",
-                    padding: "3px 10px",
-                    fontSize: "inherit",
+                    // backgroundColor: "#0052cc",
+                    // padding: "3px 10px",
+                    fontSize: "14px",
                   }}
+                  appearance="primary"
                   onClick={(e) => {
                     setAssignee(user?.displayName);
                   }}

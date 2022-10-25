@@ -23,16 +23,14 @@ import MoreIcon from "@atlaskit/icon/glyph/more";
 import "./dailyStandupPage.css";
 
 function DailyStandup() {
-  const [numberOfMinutes, setNumberOfMinutes] = useState(0.1);
+  const [numberOfMinutes, setNumberOfMinutes] = useState(1);
   const [showFlag, setShowFlag] = useState(false);
   const [flagContent, setFlagContent] = useState({
     title: "Time is running out!",
     description: "One minute remains in current standup",
   });
   const [standupData, setStandupData] = useState();
-  const [standupNotes, setStandupNotes] = useState(
-    "<h3>Add your notes here...</h3>"
-  );
+  const [standupNotes, setStandupNotes] = useState();
   const [index, setIndex] = useState(0);
   const [userIndex, setUserIndex] = useState(0);
   const [userInsight, setUserInsight] = useState();
@@ -54,10 +52,10 @@ function DailyStandup() {
       value: index,
     })) ?? [];
 
-  const timeReturn = (numberOfMinutes) =>{
+  const timeReturn = (numberOfMinutes) => {
     const d = new Date();
-    return d.setSeconds(d.getSeconds()+60*numberOfMinutes);
-  }
+    return d.setSeconds(d.getSeconds() + 60 * numberOfMinutes);
+  };
 
   const onClickChangeUser = (value) => {
     setUserIndex(value);
@@ -84,14 +82,14 @@ function DailyStandup() {
       <div className="py-2">
         <div className="d-flex align-items-center ps-3">
           <img
-            style={{ height: "20px", width: "20px" }}
+            style={{ height: "16px", width: "16px" }}
             className="ms-2"
             src={issueDisplay.fields.issuetype.iconUrl}
             alt={`${issueDisplay.fields.issuetype.name}`}
           />
           <div
             className="ms-1"
-            style={{ fontSize: "16px", color: "#0052cc", fontWeight: "500" }}
+            style={{ fontSize: "14px", color: "#0052cc", fontWeight: "500" }}
           >{`${issueDisplay.key} – ${issueDisplay.fields.summary}`}</div>
         </div>
         <div style={{ paddingLeft: "44px" }}>{issuesUpdate.message}</div>
@@ -131,18 +129,23 @@ function DailyStandup() {
       </Row>
       <Row className="mt-2">
         <Col
-          xs={5}
+          xs={4}
           className="d-flex justify-content-start align-items-center"
         ></Col>
-        <Col xs={3} className="d-flex justify-content-end align-items-center">
+        <Col xs={4} className="d-flex justify-content-end align-items-center">
           <div style={{ width: "100%", marginTop: "10px" }}>
-            <MyTimer
-              expiryTimestamp={timeReturn(numberOfMinutes)}
-              autoStart={false}
-              totalTime={numberOfMinutes * 60}
-              addFlag={addFlag}
-              expired = {()=>setTimerComplete(true)}
-            />
+            <div className="d-flex">
+              <MyTimer
+                expiryTimestamp={timeReturn(numberOfMinutes)}
+                autoStart={false}
+                totalTime={numberOfMinutes * 60}
+                addFlag={addFlag}
+                expired={() => setTimerComplete(true)}
+              />
+              <Button className="ms-3" style={{ fontSize: "14px" }} appearance="primary">
+                Complete
+              </Button>
+            </div>
           </div>
         </Col>
         <Col xs={4} className="d-flex justify-content-end align-items-center">
@@ -169,32 +172,32 @@ function DailyStandup() {
             }}
           >
             <DropdownMenu
-                trigger={({ triggerRef, ...props }) => (
-                  <Button
-                    {...props}
-                    className="float-end mx-2"
-                    iconBefore={<MoreIcon label="more" />}
-                    ref={triggerRef}
-                  />
-                )}
-              >
-                <DropdownItemGroup>
-                  {/* <DropdownItem description="Previous versions are saved">
+              trigger={({ triggerRef, ...props }) => (
+                <Button
+                  {...props}
+                  className="float-end mx-2"
+                  iconBefore={<MoreIcon label="more" />}
+                  ref={triggerRef}
+                />
+              )}
+            >
+              <DropdownItemGroup>
+                {/* <DropdownItem description="Previous versions are saved">
                     Edit
                   </DropdownItem> */}
-                  <DropdownItem>
-                    <Button
-                      className="float-end"
-                      appearance="subtle-link"
-                      component={Link}
-                      to={`/settings/1`}
-                    >
-                      Settings
-                    </Button>
-                  </DropdownItem>
-                  {/* <DropdownItem>Clone</DropdownItem> */}
-                </DropdownItemGroup>
-              </DropdownMenu>
+                <DropdownItem>
+                  <Button
+                    className="float-end"
+                    appearance="subtle-link"
+                    component={Link}
+                    to={`/settings/1`}
+                  >
+                    Settings
+                  </Button>
+                </DropdownItem>
+                {/* <DropdownItem>Clone</DropdownItem> */}
+              </DropdownItemGroup>
+            </DropdownMenu>
           </div>
         </Col>
       </Row>
@@ -204,19 +207,19 @@ function DailyStandup() {
             <Col xs={12}>
               <Card
                 style={{
-                  backgroundColor: "#ebecf0",
-                  border: "5px solid #ebecf0",
+                  backgroundColor: "#F5F5F6",
+                  border: "5px solid #F5F5F6",
                   borderRadius: "10px",
                   padding: "0",
                 }}
               >
-                <div className="heading">{"Today's Update"}</div>
+                <div className="heading">{"Updates"}</div>
                 <Card
                   style={{
                     backgroundColor: onTimerComplete ? "#6554C0" : "#ffffff",
                     borderRadius: "10px",
                     padding: !onTimerComplete ? "10px" : "0px",
-                    border: !onTimerComplete ? "auto" : "1px solid #F4F5F7",
+                    border: !onTimerComplete ? "none" : "1px solid #F4F5F7",
                   }}
                 >
                   <div className={onTimerComplete ? "d-none" : "d-block"}>
@@ -252,14 +255,14 @@ function DailyStandup() {
                       </Col>
                     </Row>
                     <div style={{ padding: "20px 20px" }}>
-                      <CardTitle className="d-flex align-items-center fs-5">
+                      <CardTitle className="d-flex align-items-center fs-6">
                         <Avatar
                           appearance="circle"
                           src={userInsight?.avatarUrl}
                           name={userInsight?.displayName}
-                          size={"medium"}
+                          size={"small"}
                         />
-                        <div className="ms-2 md-d-block">
+                        <div className="ms-1 md-d-block">
                           {userInsight?.displayName}
                         </div>
                       </CardTitle>
@@ -276,11 +279,11 @@ function DailyStandup() {
                                   <div>
                                     <div
                                       style={{
-                                        fontSize: "20px",
+                                        fontSize: "14px",
                                         fontWeight: "500",
                                       }}
                                     >
-                                      {"1. What issues are blocking me ?"}
+                                      {"• What issues are blocking me ?"}
                                     </div>
                                     {console.log(update.standupUpdate[0])}
 
@@ -296,14 +299,14 @@ function DailyStandup() {
                                   </div>
                                 )}
                                 {update.standupUpdate[1].length !== 0 && (
-                                  <div>
+                                  <div className="mt-3">
                                     <div
                                       style={{
-                                        fontSize: "20px",
+                                        fontSize: "14px",
                                         fontWeight: "500",
                                       }}
                                     >
-                                      {"2. What am I working on today?"}
+                                      {"• What am I working on today?"}
                                     </div>
 
                                     <div>
@@ -318,14 +321,14 @@ function DailyStandup() {
                                   </div>
                                 )}
                                 {update.standupUpdate[0].length !== 0 && (
-                                  <div>
+                                  <div className="mt-3">
                                     <div
                                       style={{
-                                        fontSize: "20px",
+                                        fontSize: "14px",
                                         fontWeight: "500",
                                       }}
                                     >
-                                      {"3. What did I work on yesterday?"}
+                                      {"• What did I work on yesterday?"}
                                     </div>
 
                                     <div>
@@ -355,11 +358,13 @@ function DailyStandup() {
                       color: "#ffffff",
                       padding: "20px",
                     }}
-                    className={onTimerComplete ? "d-block image" : "d-none"}
+                    className={
+                      onTimerComplete ? "d-block image my-4" : "d-none"
+                    }
                   >
                     <div className="d-flex justify-content-center align-items-center">
                       <img
-                        style={{ height: "350px", width: "350px" }}
+                        style={{ height: "160px", width: "160px" }}
                         src={timeoutPNG}
                         alt="Time Out!"
                       ></img>
@@ -369,12 +374,10 @@ function DailyStandup() {
                         fontSize: "20px",
                         fontWeight: "600",
                         color: "inherit",
-                        textAlign: "left",
+                        textAlign: "center",
                       }}
                     >
-                      {
-                        "Oops! Looks like you've exceeded the standup time limit."
-                      }
+                      {"Oops! Looks like you've exceeded the time limit."}
                     </CardTitle>
                     <CardBody
                       style={{
@@ -382,25 +385,32 @@ function DailyStandup() {
                         paddingLeft: "0",
                         paddingTop: "5px",
                         fontSize: "14px",
+                        textAlign: "center",
+                        width: "80%",
+                        margin: "0 auto",
+                        opacity: "80%",
                       }}
                     >
                       <strong>It should be short and impactful</strong> - aim
                       for fifteen minutes or less. If you are in-person, people
                       should literally stand up if they can. You may need to
                       pull people back on track if they start side discussions.
-                    </CardBody>
-                    <Button
-                      className="buttonText"
-                      onClick={() => {
-                        setNumberOfMinutes(5);
-                        setTimerComplete(false);
-                      }}
-                    >
-                      Extend time by 5 minutes
-                    </Button>
-                    <Button className="buttonText mx-2">
-                      End the Daily Stand-Up
-                    </Button>
+                    </CardBody>{" "}
+                    <div className="d-flex justify-content-center mt-4">
+                      <Button
+                        className="textWhite"
+                        appearance="link"
+                        onClick={() => {
+                          setNumberOfMinutes(5);
+                          setTimerComplete(false);
+                        }}
+                      >
+                        Extend time by 5 minutes
+                      </Button>
+                      <Button className="buttonText mx-2">
+                        End the Daily Stand-Up
+                      </Button>
+                    </div>
                   </Card>
                 </Card>
               </Card>
@@ -422,8 +432,8 @@ function DailyStandup() {
             <Col xs={12}>
               <Card
                 style={{
-                  backgroundColor: "#ebecf0",
-                  border: "5px solid #ebecf0",
+                  backgroundColor: "#F5F5F6",
+                  border: "5px solid #F5F5F6",
                   borderRadius: "10px",
                   padding: "0",
                 }}
@@ -432,6 +442,7 @@ function DailyStandup() {
                 <Card
                   style={{
                     backgroundColor: "#ffffff",
+                    border:"none",
                     borderRadius: "10px",
                     padding: "2px",
                   }}
@@ -446,16 +457,6 @@ function DailyStandup() {
               </Card>
             </Col>
           </Row>
-        </Col>
-      </Row>
-      <Row className="my-3">
-        <Col
-          xs={12}
-          className="d-flex justify-content-center align-items-center"
-        >
-          <Button style={{ fontSize: "14px" }} appearance="primary">
-            Done
-          </Button>
         </Col>
       </Row>
     </div>

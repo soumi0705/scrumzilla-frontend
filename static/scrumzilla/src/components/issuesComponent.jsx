@@ -5,8 +5,8 @@ const IssuesComponent = (props) => {
   return (
     <Card
       style={{
-        backgroundColor: "#ebecf0",
-        border: "5px solid #ebecf0",
+        backgroundColor: "#F5F5F6",
+        border: "5px solid #F5F5F6",
         borderRadius: "10px",marginBottom:"10px"
       }}
       className = "issuesComponent"
@@ -16,6 +16,7 @@ const IssuesComponent = (props) => {
         style={{
           backgroundColor: "#ffffff",
           borderRadius: "10px",
+          border:"none",
           padding: "13px",
         }}
       >

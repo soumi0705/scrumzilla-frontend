@@ -26,22 +26,24 @@ const UserInsightCard = (props) => {
   return (
     <Card
       style={{
-        border: minimal ? "none" : "auto",
         padding: "10px",
       }}
-      className={!minimal ? "mt-2 p-3" : "mt-2 hover"}
+      className={!minimal ? "mt-2 p-3 " : "mt-2 hover"}
       onClick={() => props?.onClickChangeUser(props?.id_)}
     >
       <Row>
         <Col xs={minimal ? 12 : 8}>
-          <CardTitle className="d-flex align-items-center fs-5">
+          <CardTitle
+            className="d-flex align-items-center"
+            style={{ fontSize: "14px", color: "#6B778C" }}
+          >
             <Avatar
               appearance="circle"
               src={userInsight?.avatarUrl}
               name={userInsight?.displayName}
-              size={"medium"}
+              size={"small"}
             />
-            <div className="ms-2 md-d-block">{userInsight?.displayName}</div>
+            <div className="ms-1 md-d-block">{userInsight?.displayName}</div>
           </CardTitle>
           {minimal && (
             <Row>
@@ -74,21 +76,6 @@ const UserInsightCard = (props) => {
       </Row>
       {!minimal && (
         <Row>
-          <Col xs={12}>
-            <div
-              className="text-start ms-2 d-flex"
-              style={{ fontSize: "10px" }}
-            >
-              <div
-                style={{ color: "#0052cc", marginRight: "2px" }}
-              >{`${userTotal}`}</div>
-              {`Issues Assigned`}
-            </div>
-          </Col>
-        </Row>
-      )}
-      {!minimal && (
-        <Row>
           <Col xs={6}>
             <ProgressDisplay
               issueDone={userDone}
@@ -96,13 +83,29 @@ const UserInsightCard = (props) => {
               issueProgress={userProgress}
             />
           </Col>
+        </Row>
+      )}
+      {!minimal && (
+        <Row>
+          <Col xs={6}
+          className="d-flex align-items-end"
+          >
+            <div
+              className="text-start ms-3 mt-2 d-flex align-items-end"
+              style={{ fontSize: "12px", fontWeight: "500" }}
+            >
+              <div
+                style={{ color: "#0052cc", marginRight: "2px" }}
+              >{`${userTotal}`}</div>
+              {`Issues Assigned`}
+            </div>
+          </Col>
           <Col xs={6} md={5} className="offset-md-1 d-flex align-items-end">
             <CardBody
               className="d-flex text-end"
               style={{
                 fontSize: "14px",
-                paddingLeft: "0",
-                paddingRight: "0",
+                padding: "0",
                 justifyContent: "flex-end",
                 width: "inherit",
               }}

@@ -37,7 +37,7 @@ const RichText = (props) => {
 
   React.useEffect(() => {
     if (quill) {
-      quill.root.innerHTML = `${props?.defaultText}`; 
+      quill.root.innerHTML = props?.defaultText?`${props?.defaultText}`:``; 
       quill.blur();
       quill.on("text-change", () => {
         console.log("Text change!");

@@ -6,9 +6,9 @@ function ProgressDisplay(props) {
   return (
     <Card
       style={{
-        border: emphasis ? "auto" : "none",
+        border: "none",
         textAlign: "center",
-        backgroundColor: emphasis ? "#EBECF0" : "#00000000",
+        backgroundColor: emphasis ? "#F5F5F6" : "#00000000",
       }}
     >
       <CardBody
@@ -16,49 +16,49 @@ function ProgressDisplay(props) {
           padding: emphasis ? "5px 10px" : "0",
         }}
       >
-        {emphasis ? <p className="card-title">Progress Tracker</p> : null}
+        {emphasis ? <p className="tab-title">Progress Tracker</p> : null}
         <Row style={{ justifyContent: "center" }}>
-          <Col xs={4} className="middle-padding">
+          <Col xs={4} className="middle-padding rounded-2">
             <Card
               style={{
                 fontWeight: "600",
                 color: "#5E6C84",
-                border: emphasis ? "auto" : "none",
+                border: "none",
                 backgroundColor: emphasis ? "#FFFFFF" : "#00000000",
               }}
             >
-              <CardBody className="tab">
-                <p className="tab-header">Todo</p>
+              <CardBody className="tab py-1">
+                <p className="tab-header">To do</p>
                 {`${props.issueTodo}%`}
               </CardBody>
             </Card>
           </Col>
-          <Col xs={4} className="middle-padding">
+          <Col xs={4} className="middle-padding rounded-2">
             <Card
               style={{
                 fontWeight: "600",
                 color: "#0052cc",
-                border: emphasis ? "auto" : "none",
+                border: "none",
                 backgroundColor: emphasis ? "#FFFFFF" : "#00000000",
               }}
             >
-              <CardBody className="tab">
+              <CardBody className="tab py-1">
                 <p className="tab-header">Progress</p>
                 {`${props.issueProgress}%`}
               </CardBody>
             </Card>
           </Col>
-          <Col xs={4} className="middle-padding">
+          <Col xs={4} className="middle-padding rounded-2">
             <Card
               style={{
                 fontWeight: "600",
-                color: "#36B37E",
-                border: emphasis ? "auto" : "none",
+                color: "#00875A",
+                border: "none",
                 backgroundColor: emphasis ? "#FFFFFF" : "#00000000",
 
               }}
             >
-              <CardBody className="tab">
+              <CardBody className="tab py-1">
                 <p className="tab-header">Done</p>
                 {`${props.issueDone}%`}
               </CardBody>

@@ -21,7 +21,7 @@ const HomePage = (props) => {
   const [appError, setAppError] = useState();
   useEffect(() => {
     if (false) {
-      setAppError(errorHomePageData.root);
+      setAppError(errorHomePageData.root1);
     } else setEmpData(userAllocationHomePage); //API
   }, []);
   const { total, todo, progress, assigned } =
@@ -56,40 +56,47 @@ const HomePage = (props) => {
             >{`Error due to issue: ${appError?.key} – ${appError?.summary}`}</div>
           )}
           <div>{appError?.error}</div>
+          <div className="mt-2" style={{ fontSize: "12px", color: "#5E6C84" }}>
+            {appError?.key
+              ? "Go to Board > Configure Board > Issue Types > (drag and drop) Story Point estimation and Labels on desired issue type > Save."
+              : "Go to Backlog > click on Create sprint > add or create issues > click on Start sprint."}
+          </div>
         </SectionMessage>
       ) : (
         <Row>
           <Col xs={12} md={8}>
             <Row>
               <Col xs={5} sm={3}>
-                <Card>
+                <Card style={{border:"none" }}>
                   <CardBody
-                    style={{ backgroundColor: "#EBECF0", padding: "5px 10px" }}
+                    style={{ backgroundColor: "#F5F5F6", padding: "5px 10px"}}
                   >
-                    <p className="card-title">Ticket Tracker</p>
+                    <p className="tab-title">Ticket Tracker</p>
                     <Row style={{ justifyContent: "center" }}>
-                      <Col xs={6} className="middle-padding">
+                      <Col xs={6} className="middle-padding rounded-2">
                         <Card
                           style={{
                             fontWeight: "600",
                             color: "#0052cc",
                           }}
+                          className="border-0"
                         >
-                          <CardBody className="tab">
-                            <p className="tab-header">Assigned</p>
+                          <CardBody className="tab text-center py-1">
+                            <p className="tab-header text-center">Assigned</p>
                             {`${issuesAssigned}%`}
                           </CardBody>
                         </Card>
                       </Col>
-                      <Col xs={6} className="middle-padding">
+                      <Col xs={6} className="middle-padding rounded-2">
                         <Card
                           style={{
                             fontWeight: "600",
-                            color: "#FF5630",
+                            color: "#E5483B",
                           }}
+                          className="border-0"
                         >
-                          <CardBody className="tab">
-                            <p className="tab-header">Unassigned</p>
+                          <CardBody className="tab text-center py-1">
+                            <p className="tab-header text-center">Unassigned</p>
                             {`${issuesNotAssigned}%`}
                           </CardBody>
                         </Card>

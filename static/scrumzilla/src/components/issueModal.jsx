@@ -111,14 +111,18 @@ const IssueModal = () => {
               <img
                 src={issue?.issuetype?.iconUrl}
                 alt={`${issue?.issuetype?.name}`}
+                className="me-2"
               />
+              {`${issue?.issuetype?.name}`}
             </Col>
             <Col xs={8} className="d-flex align-items-center">
               <IssueHeaders>Priority</IssueHeaders>
               <img
                 src={issue?.priority?.iconUrl}
                 alt={`${issue?.priority?.name}`}
+                className="me-2"
               />
+              {`${issue?.priority?.name}`}
             </Col>
           </IssueRow>
           <IssueRow>
@@ -168,19 +172,20 @@ const IssueModal = () => {
             <Col xs={12}>
               <Card
                 style={{
-                  backgroundColor: "#ebecf0",
-                  border: "5px solid #ebecf0",
+                  backgroundColor: "#F5F5F6",
+                  border: "5px solid #F5F5F6",
                   borderRadius: "10px",
                 }}
                 className="insightsComponent"
               >
-                <div style={{ padding: "10px 5px" }}>
+                <div style={{ padding: "10px 5px" }} className="heading">
                   Contributors ordered by Label-Score
                 </div>
                 <Card
                   style={{
                     backgroundColor: "#ffffff",
                     borderRadius: "10px",
+                    border:"none",
                     padding: "13px",
                   }}
                 >
@@ -200,7 +205,7 @@ const IssueModal = () => {
                         className="compare-select"
                         classNamePrefix="user-select"
                         options={[
-                          { label: "User Data", value: "userPreviousData" },
+                          { label: "Self", value: "userPreviousData" },
                           { label: "All Users", value: "allUser" },
                           { label: "Sprint Limit", value: "sprintLimit" },
                         ]}
