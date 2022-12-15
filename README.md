@@ -1,6 +1,11 @@
-# Forge Hello World
+# Frontent for Scrumzilla Project
 
-This project contains a Forge app written in Javascript that displays `Hello World!` in a Jira project page. 
+This project contains a Forge app written in Javascript that displays Scrumzilla UI in a Jira project page.
+
+![Home Page Scrumzilla 3](https://user-images.githubusercontent.com/50131027/207849241-2d99698e-e684-47f7-b3a8-a86ed20dbea2.png)
+
+![Daily Standup Scrumzilla](https://user-images.githubusercontent.com/50131027/207849299-42427cb9-1810-4558-99b0-5053d77f33ad.png)
+
 
 See [developer.atlassian.com/platform/forge/](https://developer.atlassian.com/platform/forge) for documentation and tutorials explaining Forge.
 
